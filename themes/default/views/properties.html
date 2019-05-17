@@ -1,0 +1,12 @@
+<h1>@{title}</h1>
+
+	@{if model.count}
+		<p>@(Found <b>@{model.count}</b> @{model.count.pluralize('properties', 'property', 'properties', 'properties')}.)</p>
+		@{view('~/partials/properties', model)}
+	@{else}
+		<br />
+		<div class="empty"><i class="fa fa-search"></i>@(Opss! No properties have been found.)</div>
+		<br />
+		<br />
+	@{fi}
+@{view('~/partials/pagination', model)} 

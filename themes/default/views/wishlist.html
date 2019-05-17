@@ -1,0 +1,154 @@
+<div class="subheader">
+	<div class="container hidden-xs">
+		<div class="row">
+			<div class="col-sm-5">
+				<ul class="breadcrumb label">
+					@{foreach m in sitemap()}
+					<li><a href="@{m.url}">@{if index === 0}<i class="fa fa-home"></i>@{fi}@{m.name}</a></li>
+					@{end}
+				</ul>
+			</div>
+			<div class="col-sm-7 col-xs-12 right">
+				@{if model.wishlist && !repository.readonly && model.count && !model.wishlist.useremail}
+				<a href="#" class="wishlist-save exec" data-exec="wishlist_save"><span>@(Guardar Lista de Favoritos)</span><i class="fas fa-save"></i><i
+					 class="fas fa-times"></i></a>
+				@{fi}
+			</div>
+		</div>
+	</div>
+	@{if model.wishlist && !repository.readonly && model.count && !model.wishlist.useremail}
+	<div class="formcontainer">
+		<div class="container">
+			<div data-jc="part__common.form__if:wishlist;url:/default/partials/wishlistform.html;cache:5" class="mobilemodal hidden"></div>
+		</div>
+	</div>
+	@{fi}
+</div>
+<div class="container">
+	@{if model.count}
+	<div class="row listing-bar">
+		@{if !repository.readonly}
+		<div class="col-lg-2 col-sm-3 col-xs-6">
+			<div class="listing-label">
+				<b data-bind="common.dependencies.wishlist__!html:value.length">@{model.count}</b>&nbsp;@(@{model.count.pluralize('imóveis',
+				'imóvel', 'imóveis',
+				'imóveis')} adicionados.)
+			</div>
+		</div>
+		<div class="col-lg-2 col-sm-3 col-xs-6">
+			<div class="listing-label"><a class="wishlist-clear exec" data-exec="wishlist_clear"><i class="fas fa-save"></i><span>@(Remover
+						Todos)</span></a></div>
+		</div>
+		@{else}
+		<div class="col-lg-4 col-sm-6 col-xs-6">
+			<div class="listing-label">
+				<b>@{model.count}</b>&nbsp;@(@{model.count.pluralize('imóveis',
+				'imóvel', 'imóveis',
+				'imóveis')} nesta lista partilhada.)
+			</div>
+		</div>
+		@{fi}
+		<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-xs-12">
+			<div class="sort">
+				<span>@(Organizar por:)</span>
+				<div data-jc="clickbox__null__param:sort">
+					<a href="@{href('sort', '')}">@(Mais recentes)</a>
+					<a href="@{href('sort', 'isfeatured_desc')}">@(Em destaque)</a>
+					<a href="@{href('sort', 'price_asc')}">@(Preço baixo para alto)</a>
+					<a href="@{href('sort', 'price_desc')}">@(Preço alto para baixo)</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	@{view('~/partials/properties', model)}
+	@{else}
+	<br />
+	<div class="empty">
+		<i class="fa fa-search"></i>
+		@{if repository.readonly}
+		@(Opss! Parece que esta lista está vazia.)
+		@{else}
+		@(Opss! Parece que ainda não foram adicionados quaisquer imóveis à sua lista de favoritos.)
+		@{fi}
+	</div>
+	<br />
+	<br />
+	@{if !repository.readonly || !model.wishlist}
+	<h2 class="center">@(Experimente fazer uma pesquisa:)</h2>
+	<div data-jc="part__null__url:/default/partials/searchform.html;cache:5" class="emptyform"></div>
+	<script>
+		SET('common.form', 'searchnow');
+	</script>
+	@{fi}
+
+	@{fi}
+</div>
+@{view('~/partials/pagination', model)}
+@{if model.wishlist && model.count}
+@{if !repository.readonly && !model.wishlist.useremail}
+<button class="mobilemodalbutton exec" data-exec="wishlist_save"><i class="fas fa-save"></i>@(Guardar Lista)</button>
+@{fi}
+<div class="sharebar">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<h3>@(Partilhe esta lista:)</h3>
+				<a href="#" class="share facebook" aria-label="@(Share this property with Facebook)" role="button"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="share twitter" aria-label="@(Share this property with Twitter)" role="button"><i class="fab fa-twitter"></i></a>
+				<a href="#" class="share linkedin" aria-label="@(Share this property with LinkedIn)" role="button"><i class="fab fa-linkedin-in"></i></a>
+				<a href="#" class="share googleplus" aria-label="@(Share this property with Google+)" role="button"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="share pinterest" aria-label="@(Share this property with Pinterest)" role="button"><i class="fab fa-pinterest"></i></a>
+			</div>
+			<div class="col-md-3">
+				<a href="#" role="button" class="share email"><i class="fas fa-envelope mr"></i>@(Enviar por email)</a>
+			</div>
+		</div>
+	</div>
+</div>
+@{fi}
+
+
+<script>
+	function wishlist_save() {
+		if (common.form !== 'wishlist') {
+			SET('common.form', 'wishlist');
+		} else {
+			SET('common.form', '');
+		}
+	}
+	function wishlist_remove(el) {
+		wishlist_add(el, function(id) {
+			if (!common.dependencies.wishlist.length)
+				location.reload();
+
+			el.parent().parent().remove();
+		});
+		return false;
+	}
+	function wishlist_clear(el) {
+		SETTER('confirm', 'show', 'Tem a certeza que pretende remover todos os imóveis da sua lista de favoritos?', ['"trash"Sim', 'Não'],
+			function(index) {
+				if (!index) {
+
+					// remove
+					SETTER('loading', 'show');
+					AJAX('POST /api/wishlist/clear/', {}, function(value, err, response) {
+						SETTER('loading', 'hide', 500);
+
+						if (err) {
+							// Error handling
+							console.error('Error: could not clear property to wishlist.');
+							return;
+						}
+						location.reload();
+					});
+
+				}
+			});
+		return false;
+	}
+
+	IMPORT('ONCE //cdn.jsdelivr.net/npm/jquery-socialshare@1.0.3/dist/js/jquery-socialshare.min.js', function() {
+		$(".sharebar a.share, .sharebar button.share").jqss({ url: '@{repository.wishlistUrl}' });
+	});
+</script>

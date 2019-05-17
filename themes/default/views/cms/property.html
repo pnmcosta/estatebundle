@@ -1,0 +1,230 @@
+@{nocompress html}
+
+@{if repository.preview}
+<!-- ALL CMS CONTENT (FOR EDITOR) MUST BE WRAPPED IN <div id="CMS"> -->
+<br />
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 col-xs-12 propertydetail">
+			<div id="CMS">
+				@{if repository.page && repository.page.body}
+				<!-- RENDER UPDATED CONTENT -->
+				@{!repository.page.body}
+				@{else}
+				<!-- DEFAULT CONTENT FOR NEW PAGES FO THIS TEMPLATE -->
+				<div class="CMS_widgets" data-cms-category="Content,Inline">
+					<div class="CMS_widget CMS_remove" data-cms-widget="18111914500002kut0" data-cms-category="Content">
+						<div class="wm wp wb">
+							<a href="#" class="zx120"><i class="fas fa-file-pdf CMS_edit"></i><span class="CMS_edit">Planta do imóvel</span></a>
+						</div>
+					</div>
+					<div class="CMS_widget CMS_remove" data-cms-widget="18102615400003ljy1" data-cms-category="Content">
+						<div class="wm wp wb wc112">
+							<div class="wc112video">
+								<iframe src="https://www.youtube.com/embed/7Qivx2om0MM" width="500" height="270" frameborder="0"
+								 webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" class="CMS_edit"></iframe>
+							</div>
+						</div>
+					</div>
+					<div class="CMS_widget CMS_remove" data-cms-widget="18111914500001kut1" data-cms-category="Content">
+						<div class="wm wp wb zx112">
+							<div class="embed-responsive embed-responsive-16by9">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126153.01039407031!2d13.214064541265047!3d-8.853356218547448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a51f15cdc8d2c7d%3A0x850c1c5c5ecc5a92!2sLuanda%2C+Angola!5e0!3m2!1sen!2spt!4v1540568785299"
+								 class="embed-responsive-item CMS_edit" width="600" height="450" frameborder="0" allowfullscreen=""></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+				@{fi}
+			</div>
+		</div>
+		<div class="col-sm-4 col-xs-12">
+			<div class="center">Contact form goes here</div>
+		</div>
+	</div>
+</div>
+@{else}
+<div class="subheader">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-xs-10">
+				<span class="label">@{model.type}<span class="hidden-xs"> | @{model.location}</span></span>
+				<span class="label hidden-sm hidden-md hidden-lg">@{if !model.ispriceonrequest && model.prices &&
+					model.prices.length}
+					|
+					<b>@{if model.priceprefix}<small>@{model.priceprefix}</small> @{fi}
+						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel.pricelabel()}</span>@{end}</b>
+					@{else}
+					| <b>@(Sob Consulta)</b>
+					@{fi}</span>
+
+			</div>
+			<div class="col-sm-6 col-xs-2 right">
+				<button class="wishlist exec" data-exec="wishlist_add" data-bind="common.dependencies.wishlist__!.selected:value.indexOf('@{model.id}') > -1"
+				 data-id="@{model.id}"><i class="far fa-heart"></i><i class="fas fa-heart"></i></button>
+				<span class="label hidden-xs">@{if !model.ispriceonrequest && model.prices && model.prices.length}
+					<b>@{if model.priceprefix}<small>@{model.priceprefix}</small> @{fi}
+						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel.pricelabel()}</span>@{end}</b>
+					|
+					@{else}
+					<b>@(Sob Consulta)</b> |
+					@{fi}
+					@{model.status}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 col-xs-12 propertydetail">
+			@{if model.pictures && model.pictures.length}
+			<div data-jc="gallery" class="property">
+				<img src="/download/@{model.pictures[0]}" alt="@{model.name}" border="0" class="img-responsive" />
+
+				@{if model.pictures.length > 1}
+				@{foreach m in model.pictures}
+				<img src="/download/@{m}?s=25" border="0" alt="@{model.name} @{index}" class="img-responsive" />
+				@{end}
+				@{fi}
+ 
+				@{if model.isnew || model.isfeatured}
+				<div class="flags">
+					@{if model.isnew}<span class="new">@(Novidade)</span>@{fi}
+					@{if model.isfeatured}<span class="featured">@(Destaque)</span>@{fi}
+					@{if model.isonoffer}<span class="offer">@(Sob Oferta)</span>@{fi}
+				</div>
+				@{fi}
+				<div class="status @{model.status.toLowerCase()}">@{model.status}</div>
+			</div>
+			@{fi}
+
+			<div class="row title">
+				<div class="col-sm-8 col-xs-12">
+					<h1>@{title}</h1>
+				</div>
+				<div class="col-sm-4 col-xs-12">
+					<div class="price">
+						@{if !model.ispriceonrequest && model.prices && model.prices.length}
+						@{if model.priceprefix}<small>@{model.priceprefix}</small><br>@{fi}
+						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel.pricelabel()}</span>@{end}
+						@{else}
+						@(Sob Consulta)
+						@{fi}
+					</div>
+				</div>
+			</div>
+			<div class="row details">
+				<div class="col-xs-12">
+					<p><b>@(Localização:)</b> @{model.location}</p>
+					<p><b>@(Tipo:)</b> @{model.type}</p>
+					@{if model.reference}
+					<p><b>@(Referência:)</b> @{model.reference}</p>
+					@{fi}
+				</div>
+			</div>
+			<div class="row descriptors">
+				@{if model.bedrooms}
+				<div class="col-sm-6 ">
+					<div class="descriptor">
+						<div class="icon"><i class="quartos-icon"></i></div>
+						<span>@(Nº de Quartos)<b>@{model.bedrooms}</b></span>
+					</div>
+				</div>
+				@{fi}
+				@{if model.bathrooms}
+				<div class="col-sm-6">
+					<div class="descriptor">
+						<div class="icon"><i class="wc-icon"></i></div>
+						<span>@(Casas de Banho)<b>@{model.bathrooms}</b></span>
+					</div>
+				</div>
+				@{fi}
+				@{if model.receptions}
+				<div class="col-sm-6">
+					<div class="descriptor">
+						<div class="icon"><i class="assoalhadas-icon"></i></div>
+						<span>@(Recepções)<b>@{model.receptions}</b></span>
+					</div>
+				</div>
+				@{fi}
+				@{if model.floors}
+				<div class="col-sm-6">
+					<div class="descriptor">
+						<div class="icon"><i class="tamanho-lote-icon"></i></div>
+						<span>@(Andares)<b>@{model.floors}</b></span>
+					</div>
+				</div>
+				@{fi}
+				@{if model.descriptors && model.descriptors.length}
+				@{foreach d in model.descriptors}
+				<div class="col-sm-6">
+					<div class="descriptor">
+						<div class="icon"><i>...</i></div>
+						<span>@{d.name}<b>@{d.value}</b></span>
+					</div>
+				</div>
+				@{end}
+				@{fi}
+			</div>
+			<div class="row description">
+				<div class="col-xs-12">
+					<b>@(Descrição:)</b><br>@{model.description}
+				</div>
+			</div>
+			@{if model.features && model.features.length}
+			<hr>
+			<div class="row features">
+				@{foreach d in model.features}
+				<div class="col-sm-3 col-xs-6">
+					<i class="fas fa-check"></i>
+					<span>@{d}</span>
+				</div>
+				@{end}
+			</div>
+			<hr>
+			@{fi}
+
+			@{if model.body}
+			<div class="content">
+				<br />
+				@{!model.body}
+			</div>
+			<br />
+			@{fi}
+		</div>
+		<div class="col-sm-4 col-xs-12">
+			<div data-jc="part__null__url:/zx/partials/propertyform.html;cache:5" class="formcontainer"></div>
+			<button class="mobilemodalbutton exec" data-exec="propertyform_modal"><i class="fas fa-microphone-alt"></i>@(Pedir
+				Informações)</button>
+		</div>
+	</div>
+</div>
+
+<div class="sharebar">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<h3>@(Partilhe este imóvel:)</h3>
+				<a href="#" class="share facebook" aria-label="@(Share this property with Facebook)" role="button"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="share twitter" aria-label="@(Share this property with Twitter)" role="button"><i class="fab fa-twitter"></i></a>
+				<a href="#" class="share linkedin" aria-label="@(Share this property with LinkedIn)" role="button"><i class="fab fa-linkedin-in"></i></a>
+				<a href="#" class="share googleplus" aria-label="@(Share this property with Google+)" role="button"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="share pinterest" aria-label="@(Share this property with Pinterest)" role="button"><i class="fab fa-pinterest"></i></a>
+			</div>
+			<div class="col-md-5">
+				<a href="#" role="button" class="share email"><i class="fas fa-envelope mr"></i>@(Enviar por email)</a>
+				<a href="javascript:window.print();" role="button" class="print"><i class="fas fa-print mr"></i>@(Imprimir)</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var propertyform = { message: '@(Solicito mais informações, sem qualquer compromisso, sobre o imóvel @{model.reference||model.name}.)', property: '@{model.id}' };
+
+	IMPORT('ONCE //cdn.jsdelivr.net/npm/jquery-socialshare@1.0.3/dist/js/jquery-socialshare.min.js', function() {
+		$(".sharebar a.share, .sharebar button.share").jqss();
+	});
+</script>
+@{fi}

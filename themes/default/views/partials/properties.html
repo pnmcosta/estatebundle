@@ -1,0 +1,74 @@
+<div class="@{repository.rowClass || 'row'}" data-count="@{model.count}">
+	@{foreach m in model.items}
+	<div class="@{repository.colClass || 'col-md-4 col-sm-6'}" data-type="@{m.type}" data-status="@{m.status}">
+		<div class="post" @{if !model.ispriceonrequest && m.prices && m.prices.length} @{foreach a in m.prices} data-@{a.currency}="@{a.price}"@{end}@{fi}>
+			@{if repository.wishlist && !repository.readonly}
+			<button class="wishlist-remove exec" data-exec="wishlist_remove" data-id="@{m.id}"><i class="fa fa-times"></i></button>
+			@{fi}
+			<a href="@{m.linker}" class="image">
+				@{if m.isnew || m.isfeatured}
+				<div class="flags">
+					@{if m.isnew}<span class="new">@(New)</span>@{fi}
+					@{if m.isfeatured}<span class="featured">@(Featured)</span>@{fi}
+					@{if m.isonoffer}<span class="offer">@(Under offer)</span>@{fi}
+				</div>
+				@{fi}
+				@{if m.pictures && m.pictures.length}
+				<img src="/download/@{m.pictures[0]}?s=50" border="0" alt="@{m.name}" class="img-responsive" />
+				@{else}
+				<img src="/default/img/property-image.png" border="0" alt="@{m.name}" class="img-responsive" />
+				@{fi}
+				<div class="price">
+					@{if !m.ispriceonrequest && m.prices && m.prices.length}
+						@{if m.priceprefix}<small>@{m.priceprefix}</small><br>@{fi}
+						@{foreach a in m.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{m.pricelabel.pricelabel()}</span>@{end}
+					@{else}
+						@(On request)
+					@{fi}
+				</div>
+				<div class="status @{m.status.toLowerCase()}">@{m.status}</div>
+			</a>
+			<div class="postbody">
+				@{if !repository.wishlist}
+				<button class="wishlist exec" data-exec="wishlist_add" data-bind="common.dependencies.wishlist__!.selected:value.indexOf('@{m.id}') > -1" data-id="@{m.id}"><i class="far fa-heart"></i><i class="fas fa-heart"></i></button>
+				@{fi}
+				<a href="@{m.linker}" class="name" title="@{m.name}">@{m.name}</a>
+				<a href="@{sitemap_url('properties') +  m.linker_location}/" class="location" title="@(View all in @{m.location})"><i class="fa fa-map-marker-alt"></i>@{m.location}</a>
+				<br><a href="@{if !url || url === '/'}@{sitemap_url('properties')}@{fi}?type=@{m.type}" title="@(Filter by @{m.type})" class="type">@{m.type}</a>
+			
+				<div class="descriptors">
+					@{if m.bedrooms}
+					<div class="descriptor" >
+						<div class="icon"><i class="quartos-icon"></i></div>
+						<span>@{m.bedrooms} @{m.bedrooms.pluralize('Rooms', 'Room', 'Rooms', 'Rooms')}</span>
+					</div>
+					@{fi}
+					@{if m.bathrooms}
+					<div class="descriptor">
+						<div class="icon"><i class="wc-icon"></i></div>
+						<span>@{m.bathrooms} @{m.bathrooms.pluralize('Bathrooms', 'Bathroom', 'Bathrooms', 'Bathrooms')}</span>
+					</div>
+					@{fi}	
+					@{if m.receptions}
+					<div class="descriptor">
+						<div class="icon"><i class="assoalhadas-icon"></i></div>
+						<span >@{m.receptions} @{m.receptions.pluralize('Receptions', 'Reception', 'Receptions', 'Receptions')}</span>
+					</div>
+					@{fi}	
+					@{if m.floors}
+					<div class="descriptor">
+						<div class="icon"><i class="tamanho-lote-icon"></i></div>
+						<span>@{m.floors} @{m.bedrooms.pluralize('Floors', 'Floor', 'Floors', 'Floors')}</span>
+					</div>
+					@{fi}
+				</div>
+
+				<a href="@{m.linker}" class="date"><i class="far fa-calendar-alt"></i>@{m.date.time()}</a>
+				@{if m.agent}<a href="@{m.linker}" class="agent"><i class="fas fa-user"></i>@{m.agent.name}</a>@{fi}
+				
+			</div>
+			
+		</div>
+	</div>
+	@{end}
+</div>
