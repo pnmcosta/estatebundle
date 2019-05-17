@@ -1,19 +1,17 @@
 [![MIT License][license-image]][license-url]
 
-# Total.js CMS
+# Example Real Estate Bundle
 
-[![Professional Support](https://www.totaljs.com/img/badge-support.svg)](https://www.totaljs.com/support/) [![Chat with contributors](https://www.totaljs.com/img/badge-chat.svg)](https://messenger.totaljs.com)
 
-- Latest version: `v12.0.0` (requires __Total.js +v3.0.0__)
-- [__Live chat with professional support__](https://messenger.totaljs.com)
-- [__HelpDesk with professional support__](https://helpdesk.totaljs.com)
-- [Documentation](https://wiki.totaljs.com?q=cms+welcome)
+- Latest version: `v1.0.0` (requires __Total.js +v3.0.0__ and __Total.js CMS v12.0.0__)
+- [__Source Repository__](https://github.com/pnmcosta/estate)
+- [CMS Documentation](https://wiki.totaljs.com?q=cms+welcome)
 
 ---
 
 ## Installation
 
-- `$ cd cmsbundle`
+- `$ cd estatebundle`
 - install `$ npm install total.js`
 
 Read more in [__documentation__](https://wiki.totaljs.com/?q=cms+welcome).
