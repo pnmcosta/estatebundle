@@ -1,0 +1,9 @@
+tmp/*
+logs/*
+debug.pid
+*.nosql-backup
+*.nosql-log
+*.nosql-counter2
+*.cache
+node_modules
+.src/*

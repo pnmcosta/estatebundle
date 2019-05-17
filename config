@@ -1,6 +1,6 @@
-name                      : Premium CMS
-version                   : 12.0.0
-author                    : Peter Širka
+name                      : Real Estate CMS
+version                   : 1.0.0
+author                    : Pedro Maia Costa
 
 // Hidden super admin in the form username:password
 admin-superadmin          : admin:admin
@@ -15,3 +15,7 @@ default_image_converter   : gm
 
 // Default theme
 default_theme             : default
+
+// Properties config
+wishlist_cookie              : __wishlist
+currency_cookie              : __currency

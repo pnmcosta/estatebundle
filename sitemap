@@ -6,3 +6,8 @@ notices           : @(Notices)             --> @(/notices/)              --> hom
 
 // Admin area
 admin             : @(Admin)               --> @(/admin/*)
+
+// Properties
+properties          : @(Properties)       --> @(/properties/*)             --> homepage
+detail            : @(Detail)       --> @(/property/{0}/)          --> properties
+wishlist          : @(Wishlist)       --> @(/wishlist/*)          --> properties

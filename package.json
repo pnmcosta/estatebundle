@@ -1,11 +1,11 @@
 {
-  "name": "CMS",
-  "description": "A simple and powerful CMS solution written in Total.js / Node.js.",
-  "version": "12.0.0",
+  "name": "estatebundle",
+  "description": "Total.js CMS bundle to manage real estate properties.",
+  "version": "1.0.0",
   "main": "release.js",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/totaljs/cms"
+    "type": "git",
+    "url": "https://github.com/pnmcosta/estatebundle"
   },
   "dependencies": {
     "total.js": "latest"
@@ -16,6 +16,6 @@
   "keywords": [
     "cms"
   ],
-  "author": "Peter Širka",
-  "license":"MIT"
+  "author": "Pedro Maia Costa",
+  "license": "MIT"
 }
