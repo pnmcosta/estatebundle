@@ -8,7 +8,7 @@
     "url": "https://github.com/pnmcosta/estatebundle"
   },
   "dependencies": {
-    "total.js": "latest"
+    "total.js": "pnmcosta/framework"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
