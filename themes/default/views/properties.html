@@ -1,12 +1,47 @@
-<h1>@{title}</h1>
+<div class="row">
+	<div class="col-md-3">
 
-	@{if model.count}
-		<p>@(Found <b>@{model.count}</b> @{model.count.pluralize('properties', 'property', 'properties', 'properties')}.)</p>
+		<div class="sidemenu">
+			<nav>
+				@{foreach l in G.properties.locations}
+				@{if l.count}
+				<a href="@{sitemap_url('properties') +  l.linker}/" class="location" title="@(View all in @{l.name})"><i
+						class="fa fa-map-marker-alt"></i>@{l.name}</a>
+				@{fi}
+				@{end}
+			</nav>
+			
+		</div>
+		<div class="sort">
+			<span>@(Sort by:)</span>
+			<div data-jc="clickbox__null__param:sort">
+				<a href="@{href('sort', '')}">@(Recent)</a>
+				<a href="@{href('sort', 'isfeatured_desc')}">@(Featured)</a>
+				<a href="@{href('sort', 'price_asc')}">@(Lowest price)</a>
+				<a href="@{href('sort', 'price_desc')}">@(Highest price)</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+
+		<div class="listingheader">
+			<h1>@{title}</h1>
+			@{if model.count}
+			<div class="right">@(Found <b>@{model.count}</b> @{model.count.pluralize('properties', 'property',
+				'properties','properties')}.)</div>
+			@{fi}
+		</div>
+
+
+
+		@{if model.count}
 		@{view('~/partials/properties', model)}
-	@{else}
+		@{view('~/partials/pagination', model)}
+		@{else}
 		<br />
 		<div class="empty"><i class="fa fa-search"></i>@(Opss! No properties have been found.)</div>
 		<br />
 		<br />
-	@{fi}
-@{view('~/partials/pagination', model)} 
+		@{fi}
+	</div>
+</div>

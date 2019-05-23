@@ -87,10 +87,287 @@ footer > a { color: black; }
 .sidemenu .fa { margin-right: 5px; }
 .sidemenu .selected { color: black; font-weight: bold; }
 .sidemenu label { font-size: 18px; font-family: $font; text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: bold; color: #A0A0A0; }
-.sidemenu { margin-bottom: 20px; background-color: #F0F0F0; padding: 10px 15px; border-radius: 3px; margin-right: 10px; }
+.sidemenu { margin-bottom: 20px; background-color: #F0F0F0; padding: 10px 15px; border-radius: 3px; }
 
 .menulayoutborder { border-left: 1px solid #E8E8E8; padding-left: 0; min-height: 500px; }
 
+.property .postbody { padding: 10px; }
+
+.property{
+    position: relative;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);    
+		outline: 0;
+        height: 100%;
+}
+.property:hover .image:before{
+    display: block;
+    position: absolute;
+    content:'';
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
+    background-color: rgba(65, 31, 31, 0.6);
+    height: 100%;
+    width: 100%; 
+    border-radius: 4px;
+}
+.property:hover .image::after{
+    display: block;
+    content: '\f002';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900; 
+    color:white;
+    opacity: 0.5;
+    font-size: 34px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.property .image{
+    position:relative;
+    display: block;
+}
+.property .image img{
+    width:100%;
+    border-radius: 4px 4px 0 0;
+}
+.property .image:hover{
+    text-decoration: none;
+}
+.property .flags{
+    position: absolute;
+    top:10px;
+    left:10px;
+}
+.property .flags span{
+    color:white;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1em;
+    font-weight: 800;
+    padding:5px 12px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+    background-color:#78AE4E;
+}
+.property .price{
+    position: absolute;
+    bottom:12px;
+    left:10px;
+    color:white;
+    font-size:16px;
+    font-weight: 800;
+    max-width:150px;
+    display: inline-block;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+.property .status{
+    color:#78AE4E;
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1em;
+    font-weight: 800;
+    padding:5px 12px;
+    text-transform: uppercase;
+    display: block;
+    position: absolute;
+    bottom:14px;
+    right: 10px;
+}
+
+.property .descriptors{
+    padding:16px 20px;
+    border-bottom:1px solid white;
+    overflow: hidden;    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 68px; 
+}
+.property .descriptor {display: inline-block;margin-right: 10px; margin-bottom:5px;}
+.property .descriptor:last-child {margin-right: 0;}
+.property .descriptor span{display: inline-block;}
+
+
+.property .name{
+    display: block;
+    padding-right:22px; 
+    font-size: 16px;
+    font-weight: 800;
+    color:black;
+    overflow: hidden;    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom:5px;
+    text-decoration: none;
+}
+.property .location,
+.property .type{
+    font-size: 14px;
+    color:rgba(0, 0, 0, 0.5);
+}
+.property .type{
+    font-weight: 800;
+}
+.property .location i{
+    font-size: 14px;
+    margin-right: 4px;
+}
+.property .wishlist{
+    float: right;
+} 
+.property .details{
+    font-size: 10px;
+}
+.property .details a{
+    color: rgba(65, 31, 31, 0.5);
+}
+.property .details a i{
+    margin-right: 2px;
+}
+
+.wishlist{
+    background-color: transparent;
+    font-size: 16px;
+    color:#78AE4E;
+    border: none;
+}
+.wishlist.selected .fas,
+.wishlist:hover .fas{
+    display: inline-block;
+}
+.wishlist.selected .far,
+.wishlist:hover .far,
+.wishlist .fas{
+    display: none;
+}
+
+.wishlist-save {
+    font-size: 12px;
+}
+.wishlist-save span {
+    color: rgba(65, 31, 31, 0.5);
+    display: inline-block;
+}
+.wishlist-save:hover {
+    text-decoration: none;
+}
+.wishlist-save i{
+    margin-top:18px;
+    margin-bottom: 18px;
+    background-color: blue;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+    border:none;
+    color:white;
+    font-size: 18px;
+    line-height: 18px;
+    padding:11px;
+    min-width: 40px;
+    text-align: center;
+    margin-left:10px;
+    display: inline-block;
+}
+.wishlist-save:hover i{
+    background-color: blue;
+    text-decoration: none;
+}
+.wishlist-save:focus i,
+.wishlist-save:active i{
+    color:rgba(255, 255, 255, 0.5);
+    background-color:blue;
+}
+.wishlist-save .fa-times{
+    display:none;
+}
+.wishlist-clear{
+    color: blue;
+}
+.wishlist-clear:hover{
+    color:blue;
+    text-decoration: none;
+}
+.wishlist-clear i{
+    margin-right: 4px;
+}
+.wishlist-remove {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    border-radius: 20px;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 11px;
+    min-width: 40px;
+    text-align: center;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: -15px;
+    z-index: 1;
+    right: -15px;
+    color:blue;
+}
+.wishlist-remove:hover {
+    color:blue;
+    text-decoration: none;
+}
+.wishlistform{
+    background-color:white;
+    text-align:center;
+}
+.wishlistform .header > i{
+    position: absolute;
+    top:10px;
+    font-size:18px;
+    left: 20px;
+}
+.wishlistform .body .ui-textbox-label{
+    display: none;
+}
+.wishlistform .email .ui-textbox{
+    padding:10px;
+}
+.wishlistform .email .ui-textbox-input{
+    padding-top: 4px;
+}
+.wishlistform .body .ui-textbox-helper,
+.wishlistform .email .ui-textbox-input input{
+    text-align: center;
+}
+ 
+.wishlistform .share{
+    user-select: all;
+    border-radius: 4px;
+    background-color: white;
+    padding:10px;
+    margin-bottom:15px;
+    overflow: hidden;
+}
+
+.wishlistform .success .icon{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    border: 3px solid blue;
+}
+.wishlistform .success .icon i{
+    font-size:25px;
+    padding-top:15px;
+    color: blue;
+}
+.wishlistform .success p{
+    font-weight: 800;
+    font-size: 22px;
+}
+.listingheader {display: flex; flex-wrap: wrap; justify-content: flex-start;	align-items: baseline;}
+.listingheader h1 {flex: 1 1 auto;}
 @media(max-width: 768px) {
 
 	.postdetail { border: 0; padding: 0; }

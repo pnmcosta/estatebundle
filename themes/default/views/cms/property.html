@@ -53,7 +53,7 @@
 					model.prices.length}
 					|
 					<b>@{if model.priceprefix}<small>@{model.priceprefix}</small> @{fi}
-						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel.pricelabel()}</span>@{end}</b>
+						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel}</span>@{end}</b>
 					@{else}
 					| <b>@(Sob Consulta)</b>
 					@{fi}</span>
@@ -64,7 +64,7 @@
 				 data-id="@{model.id}"><i class="far fa-heart"></i><i class="fas fa-heart"></i></button>
 				<span class="label hidden-xs">@{if !model.ispriceonrequest && model.prices && model.prices.length}
 					<b>@{if model.priceprefix}<small>@{model.priceprefix}</small> @{fi}
-						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel.pricelabel()}</span>@{end}</b>
+						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel}</span>@{end}</b>
 					|
 					@{else}
 					<b>@(Sob Consulta)</b> |
@@ -107,7 +107,7 @@
 					<div class="price">
 						@{if !model.ispriceonrequest && model.prices && model.prices.length}
 						@{if model.priceprefix}<small>@{model.priceprefix}</small><br>@{fi}
-						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel.pricelabel()}</span>@{end}
+						@{foreach a in model.prices}<span data-bind="common.currency__show:value === '@{a.currency}'">@{a.price.currency(a.currency)}@{model.pricelabel}</span>@{end}
 						@{else}
 						@(Sob Consulta)
 						@{fi}
